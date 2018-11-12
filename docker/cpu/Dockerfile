@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-numpy \
         python-pip \
         python-setuptools \
-        python-scipy && \
+        python-scipy \
+        vim && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CAFFE_ROOT=/opt/caffe
