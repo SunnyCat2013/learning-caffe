@@ -1,6 +1,5 @@
 FROM ubuntu:16.04
 LABEL maintainer caffe-maint@googlegroups.com
-RUN apt-get remove python-pip
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
@@ -33,7 +32,7 @@ ENV CLONE_TAG=1.0
 
 # RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . 
 RUN git clone https://github.com/SunnyCat2013/learning-caffe.git .
-# RUN pip install --upgrade pip
+RUN pip install --upgrade pip
 RUN cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd ..
 RUN mkdir build && cd build && \
     cmake -DCPU_ONLY=1 .. && \
