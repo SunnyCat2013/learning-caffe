@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 LABEL maintainer caffe-maint@googlegroups.com
-RUN apt-get remove python-pip
+RUN apt-get remove -y python-pip
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
