@@ -31,10 +31,10 @@ WORKDIR $CAFFE_ROOT
 # https://github.com/docker/hub-feedback/issues/460
 ENV CLONE_TAG=1.0
 
-RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . && \
-    pip install --upgrade pip && \
-    cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
-    mkdir build && cd build && \
+RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . 
+RUN pip install --upgrade pip
+RUN cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd ..
+RUN mkdir build && cd build && \
     cmake -DCPU_ONLY=1 .. && \
     make -j"$(nproc)"
 
