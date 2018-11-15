@@ -1,6 +1,5 @@
 FROM ubuntu:16.04
 LABEL maintainer caffe-maint@googlegroups.com
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
@@ -21,7 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-numpy \
         python-pip \
         python-setuptools \
-        python-scipy && \
+        python-scipy \
+        vim && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CAFFE_ROOT=/opt/caffe
@@ -31,10 +31,11 @@ WORKDIR $CAFFE_ROOT
 # https://github.com/docker/hub-feedback/issues/460
 ENV CLONE_TAG=1.0
 
-RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . && \
-    pip install --upgrade pip && \
-    cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
-    mkdir build && cd build && \
+# RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . 
+RUN git clone https://github.com/SunnyCat2013/learning-caffe.git .
+RUN pip install --upgrade pip
+RUN cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd ..
+RUN mkdir build && cd build && \
     cmake -DCPU_ONLY=1 .. && \
     make -j"$(nproc)"
 
