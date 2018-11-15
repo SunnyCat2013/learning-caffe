@@ -1,3 +1,5 @@
+// 如果加载了，就不再加载；否则，加载。
+// 为什么不把这个内置一下？在编译器里写上，如果加载过了就不再加载？
 #ifndef CAFFE_BLOB_HPP_
 #define CAFFE_BLOB_HPP_
 
@@ -9,6 +11,7 @@
 #include "caffe/proto/caffe.pb.h"
 #include "caffe/syncedmem.hpp"
 
+// 这个最大连接数吗？
 const int kMaxBlobAxes = 32;
 
 namespace caffe {
@@ -27,8 +30,10 @@ class Blob {
        : data_(), diff_(), count_(0), capacity_(0) {}
 
   /// @brief Deprecated; use <code>Blob(const vector<int>& shape)</code>.
+  // 原始的经典图像接口。使用 explicit 规定必须显式初始化。
   explicit Blob(const int num, const int channels, const int height,
       const int width);
+  // 扩展性更好的接口。
   explicit Blob(const vector<int>& shape);
 
   /// @brief Deprecated; use <code>Reshape(const vector<int>& shape)</code>.
