@@ -1,6 +1,8 @@
 #include <climits>
 #include <vector>
 
+// 这个在编译的时候，路径是从哪里开始的呢？
+// 怎么才能找到 caffe/blob.hpp 呢？
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
 #include "caffe/syncedmem.hpp"
@@ -558,4 +560,3 @@ template class Blob<int>;
 template class Blob<unsigned int>;
 
 }  // namespace caffe
-
