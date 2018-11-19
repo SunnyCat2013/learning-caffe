@@ -60,6 +60,7 @@ int main(int argc, const char * argv[]) {
 // char gInstantiationGuardHAHA;
 // template class HAHA<float>;
 // template class HAHA<double>;
+// 这么看，宏定义，相当于文件编辑级别的操作呀。
 #define INSTANTIATE_CLASS(classname) \
   char gInstantiationGuard##classname; \
   template class classname<float>; \
