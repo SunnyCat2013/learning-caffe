@@ -48,6 +48,8 @@ class Blob {
    * or Layer::Forward. When changing the size of blob, memory will only be
    * reallocated if sufficient memory does not already exist, and excess memory
    * will never be freed.
+   * 以前学习内存分配和释放的时候，没有遇到到应用需要占据大量内存的实用场景。
+   * 现在好是可以的。
    *
    * Note that reshaping an input blob and immediately calling Net::Backward is
    * an error; either Net::Forward or Net::Reshape need to be called to
@@ -155,6 +157,7 @@ class Blob {
     return shape(index);
   }
 
+  // 这些都还好理解，无非把多维数据的下标，变成 offset。
   inline int offset(const int n, const int c = 0, const int h = 0,
       const int w = 0) const {
     CHECK_GE(n, 0);
