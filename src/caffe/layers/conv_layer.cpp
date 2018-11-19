@@ -6,9 +6,14 @@ namespace caffe {
 
 template <typename Dtype>
 void ConvolutionLayer<Dtype>::compute_output_shape() {
+  // 核大小
   const int* kernel_shape_data = this->kernel_shape_.cpu_data();
+  // 滑动步长
   const int* stride_data = this->stride_.cpu_data();
+
+  // 边缘补齐
   const int* pad_data = this->pad_.cpu_data();
+  // https://pic4.zhimg.com/v2-4959201e816888c6648f2e78cccfd253_b.gif dilation 实例
   const int* dilation_data = this->dilation_.cpu_data();
   this->output_shape_.clear();
   for (int i = 0; i < this->num_spatial_axes_; ++i) {
