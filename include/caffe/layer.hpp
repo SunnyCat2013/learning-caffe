@@ -28,6 +28,7 @@ namespace caffe {
  * They may also implement a Backward function, in which they compute the error
  * gradients with respect to their input Blob%s, given the error gradients with
  * their output Blob%s.
+ * Layers 要实现 Forward function 和 Backward function
  */
 template <typename Dtype>
 class Layer {
@@ -37,6 +38,7 @@ class Layer {
    * to SetUp(), where the dimensions of the bottom blobs are provided to the
    * layer.
    */
+  // 显式初始化 layer_param_
   explicit Layer(const LayerParameter& param)
     : layer_param_(param) {
       // Set phase and copy blobs (if there are any).
@@ -87,6 +89,9 @@ class Layer {
    * Setting up the shapes of top blobs and internal buffers should be done in
    * <code>Reshape</code>, which will be called before the forward pass to
    * adjust the top blob sizes.
+   * 1. 读 layer_param_
+   * 2. 顶层维度设置
+   * 3. 内部缓存设置
    */
   virtual void LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {}
@@ -102,6 +107,7 @@ class Layer {
    * of the bottom (input) blobs, as well as reshaping any internal buffers
    * and making any other necessary adjustments so that the layer can
    * accommodate the bottom blobs.
+   *  Reshape 是为了适合不同的输入、输出、缓存的维度吧。
    */
   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) = 0;
@@ -122,6 +128,8 @@ class Layer {
    * then computes and returns the loss.
    *
    * Your layer should implement Forward_cpu and (optionally) Forward_gpu.
+   * 关键：计算前向输出。
+   * 这里还说了要计算 loss? 不太明白。
    */
   inline Dtype Forward(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);
@@ -134,6 +142,7 @@ class Layer {
    *     the output blobs, whose diff fields store the gradient of the error
    *     with respect to themselves
    * @param propagate_down
+   *     是 dropout 吗？
    *     a vector with equal length to bottom, with each index indicating
    *     whether to propagate the error gradients down to the bottom blob at
    *     the corresponding index
@@ -153,6 +162,7 @@ class Layer {
 
   /**
    * @brief Returns the vector of learnable parameter blobs.
+   * 参数 blob
    */
   vector<shared_ptr<Blob<Dtype> > >& blobs() {
     return blobs_;
@@ -170,6 +180,7 @@ class Layer {
 
   /**
    * @brief Returns the scalar loss associated with a top blob at a given index.
+   * 走出的 loss 设置为 0
    */
   inline Dtype loss(const int top_index) const {
     return (loss_.size() > top_index) ? loss_[top_index] : Dtype(0);
@@ -184,6 +195,10 @@ class Layer {
     }
     loss_[top_index] = value;
   }
+
+
+// 下面都是一些输入输出的限制
+
 
   /**
    * @brief Returns the layer type.
@@ -293,6 +308,7 @@ class Layer {
 
 
  protected:
+  // 有时间了解一下 proto 是做什么的。
   /** The protobuf that stores the layer parameters */
   LayerParameter layer_param_;
   /** The phase: TRAIN or TEST */
@@ -306,6 +322,7 @@ class Layer {
    *  the objective function. */
   vector<Dtype> loss_;
 
+  // Forward_cpu() 纯虚函数，一定要实现。
   /** @brief Using the CPU device, compute the layer output. */
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) = 0;
@@ -385,6 +402,7 @@ class Layer {
   /**
    * Called by SetUp to initialize the weights associated with any top blobs in
    * the loss function. Store non-zero loss weights in the diff blob.
+   * 设置损失的权重，损失数组的大小要与 top blob 一致。
    */
   inline void SetLossWeights(const vector<Blob<Dtype>*>& top) {
     const int num_loss_weights = layer_param_.loss_weight_size();
@@ -416,7 +434,7 @@ inline Dtype Layer<Dtype>::Forward(const vector<Blob<Dtype>*>& bottom,
   Reshape(bottom, top);
   switch (Caffe::mode()) {
   case Caffe::CPU:
-    Forward_cpu(bottom, top);
+    Forward_cpu(bottom, top); // 不太明白，这里怎么计算的 loss 的？
     for (int top_id = 0; top_id < top.size(); ++top_id) {
       if (!this->loss(top_id)) { continue; }
       const int count = top[top_id]->count();
