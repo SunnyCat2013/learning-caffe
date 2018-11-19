@@ -1,3 +1,6 @@
+/*
+* 总得来看 blob 是为了连接数据结构与内存，并进行数据转移的数据结构。
+*/
 #include <climits>
 #include <vector>
 

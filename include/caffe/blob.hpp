@@ -157,6 +157,7 @@ class Blob {
     return shape(index);
   }
 
+  // 这些都还好理解，无非把多维数据的下标，变成 offset。
   inline int offset(const int n, const int c = 0, const int h = 0,
       const int w = 0) const {
     CHECK_GE(n, 0);
