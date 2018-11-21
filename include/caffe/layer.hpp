@@ -40,6 +40,7 @@ class Layer {
    */
   // 显式初始化 layer_param_
   // LayerParameter 的定义在 caffe.proto: message LayerParamete.
+  // protobuf 是独立于语言级别的数据结构？
   explicit Layer(const LayerParameter& param)
     : layer_param_(param) {
       // Set phase and copy blobs (if there are any).
