@@ -13,6 +13,7 @@ namespace caffe {
 /**
  * @brief Abstract base class that factors out the BLAS code common to
  *        ConvolutionLayer and DeconvolutionLayer.
+ * BaseConvolutionLayer 实现了 cnn 的卷积与反卷积的运算。
  */
 template <typename Dtype>
 class BaseConvolutionLayer : public Layer<Dtype> {
