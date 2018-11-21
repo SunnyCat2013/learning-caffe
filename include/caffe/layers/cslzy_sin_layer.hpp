@@ -16,7 +16,7 @@ namespace caffe {
     public:
         explicit CslzySinLayer(const LayerParameter& param)
             : NeuronLayer<Dtype>(param) {}
-        virtual inline const char* type() const { return "Cslzy_Sin_Layer"; }
+        virtual inline const char* type() const { return "CslzySin"; }
     protected:
         // 下面这几个函数必须重写。
         virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
