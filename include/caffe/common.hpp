@@ -38,6 +38,29 @@ private:\
   classname& operator=(const classname&)
 
 // Instantiate a class with float and double specifications.
+// 后面两个模版我明白，第二行这两个 ## 什么意思呢？是 concatetion
+/*
+#include <stdio.h>
+#include <stdlib.h>
+#define concate(a, b) char a##b
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    printf("Hello, World!\n");
+    int xy = 300;
+//    cout << concate(x, y) << endl;
+    printf("%d\n", concate(x, y));
+    return 0;
+}
+*/
+
+// https://blog.csdn.net/raby_gyl/article/details/68489152
+// 这里相当于定义了三个变量，如
+// classname = HAHA
+// 则使用些宏，相当于定义了：
+// char gInstantiationGuardHAHA;
+// template class HAHA<float>;
+// template class HAHA<double>;
+// 这么看，宏定义，相当于文件编辑级别的操作呀。
 #define INSTANTIATE_CLASS(classname) \
   char gInstantiationGuard##classname; \
   template class classname<float>; \

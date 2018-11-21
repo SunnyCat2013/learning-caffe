@@ -13,17 +13,21 @@ namespace caffe {
 /**
  * @brief Abstract base class that factors out the BLAS code common to
  *        ConvolutionLayer and DeconvolutionLayer.
+ * BaseConvolutionLayer 实现了 cnn 的卷积与反卷积的运算。
  */
 template <typename Dtype>
 class BaseConvolutionLayer : public Layer<Dtype> {
  public:
+  // 使用 Layer 初始化 Layer 类的 LayerParameter 成员函数。主要是初始化 blobs。
   explicit BaseConvolutionLayer(const LayerParameter& param)
       : Layer<Dtype>(param) {}
+  // 继续继承 LayerSetUp and Reshape。
   virtual void LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);
   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);
 
+  // inline 函数感觉和 macro 在代码块展开上比较相似。https://blog.csdn.net/BjarneCpp/article/details/76044493
   virtual inline int MinBottomBlobs() const { return 1; }
   virtual inline int MinTopBlobs() const { return 1; }
   virtual inline bool EqualNumBottomTopBlobs() const { return true; }
@@ -32,6 +36,11 @@ class BaseConvolutionLayer : public Layer<Dtype> {
   // Helper functions that abstract away the column buffer and gemm arguments.
   // The last argument in forward_cpu_gemm is so that we can skip the im2col if
   // we just called weight_cpu_gemm with the same input.
+  // 下面这些函数不能被该类的对象直接访问，是因为它的类只需要调用更高一级的接口（如，forward_cpu）就可以了。
+  // 不需要知道它的类用了哪些方法实现了高级接口。
+  // 同时，一些友元是可以使用这些次高级的方法的。
+  // http://blog.51cto.com/cnmtjp/36548
+  // protected, 可以给自己用，可以给友元用，不需要给对象用（因为对象可以用更高级的）。
   void forward_cpu_gemm(const Dtype* input, const Dtype* weights,
       Dtype* output, bool skip_im2col = false);
   void forward_cpu_bias(Dtype* output, const Dtype* bias);
