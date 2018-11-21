@@ -1,4 +1,34 @@
 #ifndef CAFFE_CSLZY_SIN_LAYER_HPP_
 #define CAFFE_CSLZY_SIN_LAYER_HPP_
 
+#include <vector>
+
+#include "caffe/blob.hpp"
+#include "caffe/layer.hpp"
+#include "caffe/proto/caffe.pb.h"
+
+#include "caffe/layers/neuron_layer.hpp"
+
+namespace caffe {
+
+    template <typename Dtype>
+    class CslzySinLayer : public NeuronLayer<Dtype> {
+    public:
+        explicit CslzySinLayer(const LayerParameter& param)
+            : NeuronLayer<Dtype>(param) {}
+        virtual inline const char* type() const { return "Cslzy_Sin_Layer"; }
+    protected:
+        // 下面这几个函数必须重写。
+        virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+         const vector<Blob<Dtype>*>& top);
+        virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+         const vector<Blob<Dtype>*>& top);
+
+        virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+         const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+        virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+         const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+    }; // class CslzySinLayer
+} // namespace caffe
+
 #endif // CAFFE_CSLZY_SIN_LAYER_HPP_
