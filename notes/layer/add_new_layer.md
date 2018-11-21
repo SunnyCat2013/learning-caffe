@@ -4,4 +4,5 @@
 - 写一个测试，把输入数据放大再输出。
 
 # 参考
+https://github.com/BVLC/caffe/wiki/Simple-Example:-Sin-Layer
 https://blog.csdn.net/chenriwei2/article/details/46432727
