@@ -11,6 +11,7 @@
 #include "caffe/test/test_caffe_main.hpp"
 #include "caffe/test/test_gradient_check_util.hpp"
 
+// cmake -DCPU_ONLY=1 .. && make -j 4 && make test && make runtest && test/test.testbin --gtest_filter='*TanH*'
 
 namespace caffe {
     template <typename TypeParam>
