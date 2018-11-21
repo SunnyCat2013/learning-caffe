@@ -13,7 +13,8 @@
 #include "caffe/layers/cslzy_sin_layer.hpp"
 
 namespace caffe {
-    template CslzySinLayerTest : public MultiDeviceTest<TypeParam> {
+    template <typename TypeParam>
+    class CslzySinLayerTest : public MultiDeviceTest<TypeParam> {
         typedef typename TypeParam::Dtype Dtype;
     protected:
         CslzySinLayer()
