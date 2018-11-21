@@ -17,7 +17,7 @@ namespace caffe {
     class CslzySinLayerTest : public MultiDeviceTest<TypeParam> {
         typedef typename TypeParam::Dtype Dtype;
     protected:
-        CslzySinLayer()
+        CslzySinLayerTest()
             : blob_bottom_(new Blob<Dtype>(2, 3, 4, 5)),
               blob_top_(new Blob<Dtype>())
         {
