@@ -71,10 +71,12 @@ namespace caffe {
          vector<Blob<Dtype>*> blob_top_vec_;
         };
         TYPED_TEST_CASE(CslzySinLayerTest, TestDtypesAndDevices);
-        TYPED_TEST(CslzySinLayerTest, TestSin) {
+        // 第二个参数是用来区分不同测试的分类的。。可以不用事先定义。。
+        TYPED_TEST(CslzySinLayerTest, TestCslzySin) {
           this->TestForward(1.0);
+          this->TestForward(1.5);
         }
-        TYPED_TEST(CslzySinLayerTest, TestSinGradient) {
+        TYPED_TEST(CslzySinLayerTest, TestCslzySinGradient) {
           this->TestBackward(1.0);
         }
 
