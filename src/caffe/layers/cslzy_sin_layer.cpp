@@ -34,4 +34,10 @@ namespace caffe {
             }
         }
     }
+
+    #ifdef CPU_ONLY // Closing off the class.
+    STUB_GPU(CslzySinLayer)
+    #endif
+    INSTANTIATE_CLASS(CslzySinLayer);
+    REGISTER_LAYER_CLASS(CslzySin);
 } // namespace caffe
