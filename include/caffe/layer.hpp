@@ -8,7 +8,7 @@
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
 #include "caffe/layer_factory.hpp"
-#include "caffe/proto/caffe.pb.h"
+#include "caffe/proto/caffe.pb.h" // 使用 caffe/proto/caffe.proto 生成
 #include "caffe/util/math_functions.hpp"
 
 /**
@@ -39,6 +39,7 @@ class Layer {
    * layer.
    */
   // 显式初始化 layer_param_
+  // LayerParameter 的定义在 caffe.proto: message LayerParamete.
   explicit Layer(const LayerParameter& param)
     : layer_param_(param) {
       // Set phase and copy blobs (if there are any).
