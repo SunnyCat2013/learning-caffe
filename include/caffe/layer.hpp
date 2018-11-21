@@ -45,6 +45,7 @@ class Layer {
     : layer_param_(param) {
       // Set phase and copy blobs (if there are any).
       phase_ = param.phase();
+      // LayerParameter.blobs_size() 是 自动生成的 method: https://developers.google.com/protocol-buffers/docs/reference/cpp-generated
       if (layer_param_.blobs_size() > 0) {
         blobs_.resize(layer_param_.blobs_size());
         for (int i = 0; i < layer_param_.blobs_size(); ++i) {
