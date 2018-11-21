@@ -36,6 +36,7 @@ void im2col_cpu(const Dtype* data_im, const int channels,
   const int output_w = (width + 2 * pad_w -
     (dilation_w * (kernel_w - 1) + 1)) / stride_w + 1;
   const int channel_size = height * width; // channel size 为啥是 height * width？
+                                           // 哦，一个channel 大小就是一个图的大小呗。
   for (int channel = channels; channel--; data_im += channel_size) {
     for (int kernel_row = 0; kernel_row < kernel_h; kernel_row++) {
       for (int kernel_col = 0; kernel_col < kernel_w; kernel_col++) {
