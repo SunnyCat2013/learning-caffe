@@ -69,11 +69,11 @@ namespace caffe {
          vector<Blob<Dtype>*> blob_bottom_vec_;
          vector<Blob<Dtype>*> blob_top_vec_;
         };
-        TYPED_TEST_CASE(SinLayerTest, TestDtypesAndDevices);
-        TYPED_TEST(SinLayerTest, TestSin) {
+        TYPED_TEST_CASE(CslzySinLayerTest, TestDtypesAndDevices);
+        TYPED_TEST(CslzySinLayerTest, TestSin) {
           this->TestForward(1.0);
         }
-        TYPED_TEST(SinLayerTest, TestSinGradient) {
+        TYPED_TEST(CslzySinLayerTest, TestSinGradient) {
           this->TestBackward(1.0);
         }
 
