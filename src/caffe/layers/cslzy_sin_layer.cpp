@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "caffe/layers/sin_layer.hpp"
+#include "caffe/layers/cslzy_sin_layer.hpp"
 
 namespace caffe {
     template <typename Dtype>
