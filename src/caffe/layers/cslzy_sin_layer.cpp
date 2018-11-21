@@ -22,6 +22,16 @@ namespace caffe {
                                          const vector<bool>& propagate_down,
                                          const vector<Blob<Dtype>*>& bottom)
     {
-        
+        if (propagate_down[0]) {
+            const Dtype* bottom_data = bottom[0]->cpu_data();
+            const Dtype* top_diff = top[0]->cpu_diff();
+            Dtype* bottom_diff = bottom[0]->mutable_cpu_diff();
+            const int count = bottom[0]->count();
+            Dtype bottom_datum;
+            for (int i = 0; i < count; ++i) {
+                bottom_datum = bottom_data[i];
+                bottom_diff[i] = top_diff[i] * cos(bottom_datum);
+            }
+        }
     }
 } // namespace caffe
