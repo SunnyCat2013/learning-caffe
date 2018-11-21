@@ -22,11 +22,21 @@ void im2col_cpu(const Dtype* data_im, const int channels,
     const int stride_h, const int stride_w,
     const int dilation_h, const int dilation_w,
     Dtype* data_col) {
+  // Example:
+  //    height = 10
+  //    pad_h = 1
+  //    dilation_h = 1
+  //    kernel_h = 3
+  //    stride_h = 1
+  //    const int output_h = (10 + 2 * 1 - (1 * (3 - 1) + 1)) / 1 + 1 = 9 + 1 = 10
+  // 原长度加上 padding 得到新长度
+  // 减去 dilated 的 kernel size ，是少了一个输出点的 stride 一定倍数的长度。
   const int output_h = (height + 2 * pad_h -
     (dilation_h * (kernel_h - 1) + 1)) / stride_h + 1;
   const int output_w = (width + 2 * pad_w -
     (dilation_w * (kernel_w - 1) + 1)) / stride_w + 1;
-  const int channel_size = height * width;
+  const int channel_size = height * width; // channel size 为啥是 height * width？
+                                           // 哦，一个channel 大小就是一个图的大小呗。
   for (int channel = channels; channel--; data_im += channel_size) {
     for (int kernel_row = 0; kernel_row < kernel_h; kernel_row++) {
       for (int kernel_col = 0; kernel_col < kernel_w; kernel_col++) {
