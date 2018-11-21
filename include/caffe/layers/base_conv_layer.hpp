@@ -39,6 +39,7 @@ class BaseConvolutionLayer : public Layer<Dtype> {
   // 不需要知道它的类用了哪些方法实现了高级接口。
   // 同时，一些友元是可以使用这些次高级的方法的。
   // http://blog.51cto.com/cnmtjp/36548
+  // protected, 可以给自己用，可以给友元用，不需要给对象用（因为对象可以用更高级的）。
   void forward_cpu_gemm(const Dtype* input, const Dtype* weights,
       Dtype* output, bool skip_im2col = false);
   void forward_cpu_bias(Dtype* output, const Dtype* bias);
