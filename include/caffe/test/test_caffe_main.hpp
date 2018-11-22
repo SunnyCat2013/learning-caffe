@@ -68,7 +68,7 @@ class GPUDeviceTest : public MultiDeviceTest<GPUDevice<Dtype> > {
 
 typedef ::testing::Types<CPUDevice<float>, CPUDevice<double>,
                          GPUDevice<float>, GPUDevice<double> >
-                         TestDtypesAndDevices;
+                         TestDtypesAndDevices; // https://jiangfeng-xiong.github.io/2016/11/01/gtest%20in%20caffe/
 
 #endif
 
