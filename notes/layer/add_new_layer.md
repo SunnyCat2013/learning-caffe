@@ -13,4 +13,5 @@
 
 # 参考
 https://github.com/BVLC/caffe/wiki/Simple-Example:-Sin-Layer
+https://github.com/BVLC/caffe/wiki/Development
 https://blog.csdn.net/chenriwei2/article/details/46432727
