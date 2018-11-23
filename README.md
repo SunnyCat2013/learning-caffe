@@ -21,6 +21,13 @@ jupyter-notebook --no-browser --ip 0.0.0.0 --port=7000 --allow-root
 3. 在本机上打开 http://localhost:7000/tree
 4. 将 docker 里面运行 jupyter notebook 产生的 token 填到网页上。
 
+# Docker image
+docker image which is build by using codes from this repository.
+```
+docker pull cslzy/learning-caffe
+```
+
+
 # Caffe
 
 [![Build Status](https://travis-ci.org/BVLC/caffe.svg?branch=master)](https://travis-ci.org/BVLC/caffe)
