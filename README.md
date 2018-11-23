@@ -6,6 +6,8 @@
 
 - [ ] 学习框架的使用
     - [ ] 训练和测试 mnist 数据集
+      学习了一下怎么训练和测试模型，看了一下 lenet_train_test.prototxt 里面的参数
+    - [ ] 学习 web_demo 的在线响应
 
 # Caffe
 
