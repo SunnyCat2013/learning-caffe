@@ -1,4 +1,5 @@
 # Learning codes and deep learning from Caffe
+- [添加新的 layer](https://github.com/SunnyCat2013/learning-caffe/blob/master/notes/layer/add_new_layer.md)
 
 # Caffe
 
