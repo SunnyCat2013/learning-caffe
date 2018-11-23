@@ -266,6 +266,8 @@ Based on the solver setting, we will print the training loss function every 100 
     I1203 solver.cpp:111] Test score #0: 0.9785
     I1203 solver.cpp:111] Test score #1: 0.0606671
 
+> difference between loss and accuracy?
+
 For each training iteration, `lr` is the learning rate of that iteration, and `loss` is the training function. For the output of the testing phase, score 0 is the accuracy, and score 1 is the testing loss function.
 
 And after a few minutes, you are done!
