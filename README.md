@@ -9,6 +9,18 @@
       学习了一下怎么训练和测试模型，看了一下 lenet_train_test.prototxt 里面的参数
     - [ ] 学习 web_demo 的在线响应
 
+# Run jupyter notebook in docker
+1. 配置 docker port mapping，名称和共享文件夹
+```
+docker run -it -p 7000:7000 --rm --name test -v $(pwd):/caffe cslzy/learning-caffe
+```
+2. 启动 jupyter notebook
+```
+jupyter-notebook --no-browser --ip 0.0.0.0 --port=7000 --allow-root
+```
+3. 在本机上打开 http://localhost:7000/tree
+4. 将 docker 里面运行 jupyter notebook 产生的 token 填到网页上。
+
 # Caffe
 
 [![Build Status](https://travis-ci.org/BVLC/caffe.svg?branch=master)](https://travis-ci.org/BVLC/caffe)
