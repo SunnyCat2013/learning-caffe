@@ -22,6 +22,9 @@ If it complains that `wget` or `gunzip` are not installed, you need to install t
 
 ## LeNet: the MNIST Classification Model
 
+> 随意轻微改变一下网络结构，看一下，是因为这个特定的网络结构的分类性能好，还是神经网络这个理论本身就非常适于学习结构知识。
+> 如果理论好，那么做一些改变，性能仍然不会变化太大才对。
+
 Before we actually run the training program, let's explain what will happen. We will use the [LeNet](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf) network, which is known to work well on digit classification tasks. We will use a slightly different version from the original LeNet implementation, replacing the sigmoid activations with Rectified Linear Unit (ReLU) activations for the neurons.
 
 The design of LeNet contains the essence of CNNs that are still used in larger models such as the ones in ImageNet. In general, it consists of a convolutional layer followed by a pooling layer, another convolution layer followed by a pooling layer, and then two fully connected layers similar to the conventional multilayer perceptrons. We have defined the layers in `$CAFFE_ROOT/examples/mnist/lenet_train_test.prototxt`.
@@ -30,7 +33,9 @@ The design of LeNet contains the essence of CNNs that are still used in larger m
 
 This section explains the `lenet_train_test.prototxt` model definition that specifies the LeNet model for MNIST handwritten digit classification. We assume that you are familiar with [Google Protobuf](https://developers.google.com/protocol-buffers/docs/overview), and assume that you have read the protobuf definitions used by Caffe, which can be found at `$CAFFE_ROOT/src/caffe/proto/caffe.proto`.
 
-Specifically, we will write a `caffe::NetParameter` (or in python, `caffe.proto.caffe_pb2.NetParameter`) protobuf. We will start by giving the network a name:
+> prototxt 是靠 protobuf 解析的吗，它与 proto 都是 protobuf 的处理对象？
+
+Specifically, we will write a `caffe::NetParameter` (or in python, `caffe.proto.caffe_pb2(pb short for protobuf).NetParameter`) protobuf. We will start by giving the network a name:
 
     name: "LeNet"
 
@@ -81,7 +86,11 @@ Let's define the first convolution layer:
 
 This layer takes the `data` blob (it is provided by the data layer), and produces the `conv1` layer. It produces outputs of 20 channels, with the convolutional kernel size 5 and carried out with stride 1.
 
+> xavier 是什么初始化的方法？
+
 The fillers allow us to randomly initialize the value of the weights and bias. For the weight filler, we will use the `xavier` algorithm that automatically determines the scale of initialization based on the number of input and output neurons. For the bias filler, we will simply initialize it as constant, with the default filling value 0.
+
+> solver and optimizer?
 
 `lr_mult`s are the learning rate adjustments for the layer's learnable parameters. In this case, we will set the weight learning rate to be the same as the learning rate given by the solver during runtime, and the bias learning rate to be twice as large as that - this usually leads to better convergence rates.
 
@@ -256,6 +265,8 @@ Based on the solver setting, we will print the training loss function every 100 
     I1203 solver.cpp:84] Testing net
     I1203 solver.cpp:111] Test score #0: 0.9785
     I1203 solver.cpp:111] Test score #1: 0.0606671
+
+> difference between loss and accuracy?
 
 For each training iteration, `lr` is the learning rate of that iteration, and `loss` is the training function. For the output of the testing phase, score 0 is the accuracy, and score 1 is the testing loss function.
 

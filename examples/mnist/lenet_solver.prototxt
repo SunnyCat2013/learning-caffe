@@ -7,9 +7,12 @@ test_iter: 100
 # Carry out testing every 500 training iterations.
 test_interval: 500
 # The base learning rate, momentum and the weight decay of the network.
+# http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
+# 5 Details of learning
+# 具体可参考 caffe.proto
 base_lr: 0.01
-momentum: 0.9
-weight_decay: 0.0005
+momentum: 0.9 # 上次更新的权重
+weight_decay: 0.0005 #
 # The learning rate policy
 lr_policy: "inv"
 gamma: 0.0001
@@ -22,4 +25,5 @@ max_iter: 10000
 snapshot: 5000
 snapshot_prefix: "examples/mnist/lenet"
 # solver mode: CPU or GPU
-solver_mode: GPU
+# solver_mode: GPU
+solver_mode: CPU
