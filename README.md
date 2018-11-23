@@ -1,5 +1,13 @@
 # Learning codes and deep learning from Caffe
-- [添加新的 layer](https://github.com/SunnyCat2013/learning-caffe/blob/master/notes/layer/add_new_layer.md)
+- [ ] 根据 http://caffe.berkeleyvision.org/tutorial/ 学习 caffe 对各种机器学习的算法的实现。
+
+- [ ] 读论文，实现论文中新的结构
+    - [x]  [添加新的 layer](https://github.com/SunnyCat2013/learning-caffe/blob/master/notes/layer/add_new_layer.md)
+
+- [ ] 学习框架的使用
+    - [ ] 训练和测试 mnist 数据集
+      学习了一下怎么训练和测试模型，看了一下 lenet_train_test.prototxt 里面的参数
+    - [ ] 学习 web_demo 的在线响应
 
 # Caffe
 

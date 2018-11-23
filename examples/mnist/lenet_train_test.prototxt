@@ -1,4 +1,4 @@
-name: "LeNet"
+name: "LeNet" // 名称
 layer {
   name: "mnist"
   type: "Data"
@@ -8,7 +8,7 @@ layer {
     phase: TRAIN
   }
   transform_param {
-    scale: 0.00390625
+    scale: 0.00390625 // 1 / 256
   }
   data_param {
     source: "examples/mnist/mnist_train_lmdb"
@@ -39,10 +39,10 @@ layer {
   bottom: "data"
   top: "conv1"
   param {
-    lr_mult: 1
+    lr_mult: 1 // weight learning rate, the same as solver
   }
   param {
-    lr_mult: 2
+    lr_mult: 2 // bias learning rate, twice as large as weight rate
   }
   convolution_param {
     num_output: 20
