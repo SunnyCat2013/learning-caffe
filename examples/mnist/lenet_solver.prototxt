@@ -11,7 +11,7 @@ test_interval: 500
 # 5 Details of learning
 # 具体可参考 caffe.proto
 base_lr: 0.01
-momentum: 0.9 # 上次更新的权重
+momentum: 0.9 # 上次更新的权重，对上次权重的保留程度。
 weight_decay: 0.0005 #
 # The learning rate policy
 lr_policy: "inv"
