@@ -1,5 +1,9 @@
 # Learning codes and deep learning from Caffe
 - [ ] 根据 http://caffe.berkeleyvision.org/tutorial/ 学习 caffe 对各种机器学习的算法的实现。
+    - [x] Layers
+    - [x] blobs
+    - [ ] loss
+    - [ ] solver
 
 - [ ] 读论文，实现论文中新的结构
     - [x]  [添加新的 layer](https://github.com/SunnyCat2013/learning-caffe/blob/master/notes/layer/add_new_layer.md)
